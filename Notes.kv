@@ -1,0 +1,73 @@
+#:kivy 2.0.0
+
+<MainWindow>:
+    orientation: 'vertical'
+    # size: '400', '600'
+    MDBoxLayout:
+        adaptive_height: True
+        md_bg_color: 0, 0, 50, .2
+        orientation: 'vertical'
+        padding: 20, 30
+        spacing: 10
+        MDLabel: 
+            text: 'Список заметок'
+            font_size: 30
+            color: 0 , 0 , 200 
+            halign: 'center'
+        MDFloatLayout:
+            adaptive_height: True
+            MDTextField:
+                id: text_note
+                hint_text: "Введите заметку"
+                mode: "rectangle"
+                pos_hint: {'center_x': .5, 'center_y': .4}               
+            MDIconButton:
+                icon: "plus"
+                pos_hint: {'center_x': .95, 'center_y': .35}
+                on_release: 
+                    app.addNote(root.ids.text_note.text)
+                    root.ids.text_note.text = ""
+    MDBoxLayout:
+        orientation: 'vertical' 
+        MDLabel: 
+            adaptive_height: True
+            md_bg_color: 0, 0, 50, .1
+            text: 'Нужно сделать'
+            font_size: 18
+            padding: 0, 0
+            color: 0 , 0 , 200 
+            halign: 'center'  
+            padding: 20, 10
+            
+        MDScrollView:
+            MDList:
+                id: search_res
+        MDLabel: 
+            md_bg_color: 0, 0, 50, .1
+            text: 'Уже сделаны'
+            halign: 'center'
+            adaptive_height: True,
+            padding: 20, 10
+            font_size: 18
+        MDScrollView:
+            MDList:
+                id: search_res1
+                                          
+<ListItemWithCheckbox>:
+    IconRightWidget:
+        icon: "delete"
+        on_release: 
+            root.delNote(root.noteId)
+    LeftCheckbox:
+        on_active: 
+            root.changeType(root.noteId, root.done)
+
+<ListItemWithCheckbox1>:
+    IconRightWidget:
+        icon: "delete"
+        on_release: 
+            root.delNote(root.noteId)
+    LeftCheckbox:
+        active: True
+        on_active: 
+            root.changeType(root.noteId, root.done)

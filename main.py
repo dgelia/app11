@@ -5,7 +5,8 @@
 Приложение для добавления, выполнения и удаления заметок
 
 '''
-
+import kivy
+import kivymd
 from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
@@ -103,6 +104,8 @@ class Notes(MDApp):
             # )
             create()
     def build(self):
+        print(kivy.__version__)
+        print(kivymd.__version__)
         return MainWindow()
 
 Notes().run()
